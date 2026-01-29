@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Payonus Email Footer">
+    <title>Payonus Email Footer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        
+        .image-container {
+            margin: 20px 0;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .info {
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .copy-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .copy-section h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .url-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .url-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9em;
+            background-color: white;
+        }
+        
+        .copy-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .copy-btn:active {
+            background-color: #004494;
+        }
+        
+        .success-message {
+            color: #28a745;
+            font-size: 0.9em;
+            margin-top: 10px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .success-message.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Payonus Email Footer</h1>
+        
+        <div class="image-container">
+            <img src="Email footer.png" alt="Payonus Email Footer" id="emailFooter">
+        </div>
+        
+        <div class="copy-section">
+            <h3>Image URL for Email Signature</h3>
+            <div class="url-box">
+                <input type="text" class="url-input" id="imageUrl" readonly>
+                <button class="copy-btn" onclick="copyImageUrl()">Copy URL</button>
+            </div>
+            <div class="success-message" id="successMessage">✓ URL copied to clipboard!</div>
+        </div>
+        
+        <div class="info">
+            <p>Use the URL above to embed this image in your email signature.</p>
+        </div>
+    </div>
+    
+    <script>
+        // Set the image URL dynamically based on the current page location
+        window.addEventListener('DOMContentLoaded', function() {
+            const baseUrl = window.location.origin + window.location.pathname.replace('index.html', '');
+            const imageUrl = baseUrl + 'Email footer.png';
+            document.getElementById('imageUrl').value = imageUrl;
+        });
+        
+        function copyImageUrl() {
+            const urlInput = document.getElementById('imageUrl');
+            urlInput.select();
+            urlInput.setSelectionRange(0, 99999); // For mobile devices
+            
+            navigator.clipboard.writeText(urlInput.value).then(function() {
+                const successMessage = document.getElementById('successMessage');
+                successMessage.classList.add('show');
+                
+                setTimeout(function() {
+                    successMessage.classList.remove('show');
+                }, 2000);
+            }).catch(function(err) {
+                alert('Failed to copy URL: ' + err);
+            });
+        }
+    </script>
+</body>
+</html>
