@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Payonus Email Footer">
-    <title>Payonus Email Footer</title>
+    <meta name="description" content="Payonus Email Signature">
+    <title>Payonus Email Signature</title>
     <style>
         * {
             margin: 0;
@@ -118,23 +118,32 @@
 </head>
 <body>
     <div class="container">
-        <h1>Payonus Email Footer</h1>
+        <h1>Payonus Email Signature</h1>
         
         <div class="image-container">
-            <img src="Email footer.png" alt="Payonus Email Footer" id="emailFooter">
+            <img src="eMAILSIGNATURE.png" alt="Payonus Email Signature" id="emailSignatureImage">
         </div>
         
         <div class="copy-section">
             <h3>Image URL for Email Signature</h3>
             <div class="url-box">
                 <input type="text" class="url-input" id="imageUrl" readonly>
-                <button class="copy-btn" onclick="copyImageUrl()">Copy URL</button>
+                <button class="copy-btn" onclick="copyToClipboard('imageUrl', 'imageSuccess')">Copy URL</button>
             </div>
-            <div class="success-message" id="successMessage">✓ URL copied to clipboard!</div>
+            <div class="success-message" id="imageSuccess">✓ URL copied to clipboard!</div>
+        </div>
+
+        <div class="copy-section">
+            <h3>Full Signature HTML Page</h3>
+            <div class="url-box">
+                <input type="text" class="url-input" id="signatureUrl" readonly>
+                <button class="copy-btn" onclick="copyToClipboard('signatureUrl', 'signatureSuccess')">Copy URL</button>
+            </div>
+            <div class="success-message" id="signatureSuccess">✓ URL copied to clipboard!</div>
         </div>
         
         <div class="info">
-            <p>Use the URL above to embed this image in your email signature.</p>
+            <p>Use the image URL in your email signature, or open the HTML page to copy the full layout.</p>
         </div>
     </div>
     
@@ -142,17 +151,19 @@
         // Set the image URL dynamically based on the current page location
         window.addEventListener('DOMContentLoaded', function() {
             const baseUrl = window.location.origin + window.location.pathname.replace('index.html', '');
-            const imageUrl = baseUrl + 'Email footer.png';
+            const imageUrl = baseUrl + 'eMAILSIGNATURE.png';
+            const signatureUrl = baseUrl + 'signature.html';
             document.getElementById('imageUrl').value = imageUrl;
+            document.getElementById('signatureUrl').value = signatureUrl;
         });
         
-        function copyImageUrl() {
-            const urlInput = document.getElementById('imageUrl');
+        function copyToClipboard(inputId, messageId) {
+            const urlInput = document.getElementById(inputId);
             urlInput.select();
             urlInput.setSelectionRange(0, 99999); // For mobile devices
             
             navigator.clipboard.writeText(urlInput.value).then(function() {
-                const successMessage = document.getElementById('successMessage');
+                const successMessage = document.getElementById(messageId);
                 successMessage.classList.add('show');
                 
                 setTimeout(function() {
